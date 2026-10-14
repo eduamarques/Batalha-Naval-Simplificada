@@ -14,3 +14,10 @@ def preenche_frota(frota, nome, linha, coluna, orientacao, tamanho):
     else:
         frota[nome].append(define_posicoes(linha, coluna, orientacao, tamanho))
     return frota
+
+def faz_jogada(tabuleiro, linha, coluna):
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = "X"
+    else:
+        tabuleiro[linha][coluna] = "-"
+    return tabuleiro
