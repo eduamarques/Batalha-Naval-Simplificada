@@ -21,3 +21,11 @@ def faz_jogada(tabuleiro, linha, coluna):
     else:
         tabuleiro[linha][coluna] = "-"
     return tabuleiro
+
+def posiciona_frota(frota):
+    grid = [ [0]*10 for _ in range(10)] # Criação de matriz 10 X 10 ensinada pelo professor --> Não houve verificação em Praire Learn
+    for navios in frota.values():
+        for navio in navios:
+            for posicao in navio:
+                grid[posicao[0]][posicao[1]] = 1
+    return grid
