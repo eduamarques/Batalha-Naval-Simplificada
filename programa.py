@@ -1,4 +1,5 @@
 from funcoes import *
+import random
 
 
 
@@ -77,8 +78,8 @@ for nome in sistema_frota:
         while posicao_valida(frota, linha, coluna, orientacao, tamanho) == False:
             print("Esta posição não está válida!")
             print(f"Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}")
-            linha = int(input("Linha"))
-            coluna = int(input("Coluna"))
+            linha = int(input("Linha: "))
+            coluna = int(input("Coluna: "))
             if nome != "submarino":
                 orientacao = input("[1] Vertical [2] Horizontal >")
                 if orientacao == "1":
@@ -104,6 +105,7 @@ tabuleiro = posiciona_frota(frota)
 
 jogando = True
 posicoes_escolhidas = []
+posicoes_escolhidas_oponente = []
 
 while jogando == True:
 
@@ -135,7 +137,26 @@ while jogando == True:
     posicoes_escolhidas.append([linha, coluna])
     tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha, coluna)
 
+    # Vitória ou ataque do oponente
+
     if afundados(frota_oponente, tabuleiro_oponente) == 10:
         print("Parabéns! Você derrubou todos os navios do seu oponente!")
         jogando = False
+
+        # Ataque do do oponente
+
+    else:
         
+        linha = random.randint(0, 9)
+        coluna = random.randint(0, 9)
+        while [linha, coluna] in posicoes_escolhidas_oponente:
+            linha = random.randint(0, 9)
+            coluna = random.randint(0, 9)
+
+        posicoes_escolhidas_oponente.append([linha, coluna])
+        print(f"Seu oponente está atacando na linha {linha} e coluna {coluna}")
+
+        tabuleiro = faz_jogada(tabuleiro, linha, coluna)
+        if afundados(frota, tabuleiro) == 10:
+            print("Xi! O oponente derrubou toda a sua frota =(")
+            jogando = False
